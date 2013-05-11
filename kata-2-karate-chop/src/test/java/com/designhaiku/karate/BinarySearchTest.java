@@ -11,13 +11,13 @@ import java.util.Vector;
 import static junit.framework.Assert.assertEquals;
 
 public class BinarySearchTest {
-    private List<Integer> values;
+    private int[] values;
     private BinarySearch binarySearch;
 
 
     @Before
     public void someBeforeMethod() {
-        values = new ArrayList<Integer>();
+        values = null;
         binarySearch = new BinarySearch();
     }
 
@@ -38,7 +38,7 @@ public class BinarySearchTest {
     public void successfullySearchSingleElementArrayAndReturnFirstIndex() {
         //precondition
         int searchTarget = 1;
-        values.add(searchTarget);
+        values = new int[]{1};
         int expectedIndex = 0;
 
         //perform test
@@ -52,8 +52,7 @@ public class BinarySearchTest {
     public void successfullySearchTwoElementArrayAndReturnSecondIndex() {
         //precondition
         int searchTarget = 1;
-        values.add(3);
-        values.add(1);
+        values = new int[]{3,1};
         int expectedIndex = 1;
 
         //perform test
@@ -67,8 +66,7 @@ public class BinarySearchTest {
     public void successfullySearchTwoElementArrayWithValueNotInArray() {
         //precondition
         int searchTarget = 1;
-        values.add(0);
-        values.add(2);
+        values = new int[]{0,2};
         int expectedIndex = binarySearch.notFound;
 
         //perform test
@@ -96,11 +94,7 @@ public class BinarySearchTest {
     public void successfullySearchMultipleValueArrayWhenSearchingNegativeNumber() {
         //precondition
         int searchTarget = 7;
-        values.add(-12);
-        values.add(-5);
-        values.add(0);
-        values.add(4);
-        values.add(7);
+        values = new int[]{-12,-5,0,4,7};
         int expectedIndex = 4;
 
         //perform test
@@ -114,11 +108,7 @@ public class BinarySearchTest {
     public void successfullySearchMultipleValueArrayWithSameValuesAndReturnFirstIndex() {
         //precondition
         int searchTarget = 7;
-        values.add(7);
-        values.add(7);
-        values.add(7);
-        values.add(7);
-        values.add(7);
+        values = new int[]{7,7,7,7,7,7};
         int expectedIndex = 0;
 
         //perform test

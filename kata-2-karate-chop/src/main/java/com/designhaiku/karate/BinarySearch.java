@@ -12,10 +12,17 @@ import java.util.List;
 public class BinarySearch {
     public int notFound = -1;
 
-    public int chop(int searchTarget, List<Integer> values) {
-        if(values == null || values.isEmpty() == true) {
+    public int chop(int searchTarget, int[] values) {
+        if(values == null) {
             return notFound;
         }
-        return values.indexOf(searchTarget);
+        for( int counter = 0; counter < values.length; counter++) {
+            int v = values[counter];
+            if( searchTarget == v) {
+                return counter;
+            }
+        }
+
+        return notFound;
     }
 }
