@@ -1,31 +1,22 @@
 package com.designhaiku.karate;
 
-
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 import static junit.framework.Assert.assertEquals;
 
-public class BinarySearchTest {
-    private int[] values;
-    private BinarySearch binarySearch;
+/**
+ * User: Jeffrey M Lutz <jeff@lutz.ws>
+ * Date: 5/11/13
+ */
+public class BinarySearchBaseTest {
+    protected int[] values;
+    protected BinarySearch binarySearch;
 
-
-    @Before
-    public void someBeforeMethod() {
-        values = null;
-        binarySearch = new BinarySearch();
-    }
-
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchEmptyArrayAndReturnNotFound() {
         //precondition
         int searchTarget = 4;
-        int expectedIndex = binarySearch.notFound;
+        int expectedIndex = BinarySearch.NOT_FOUND;
 
         //perform test
         int actualIndex = binarySearch.chop(searchTarget, values);
@@ -34,7 +25,7 @@ public class BinarySearchTest {
         assertEquals(expectedIndex, actualIndex);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchSingleElementArrayAndReturnFirstIndex() {
         //precondition
         int searchTarget = 1;
@@ -48,11 +39,11 @@ public class BinarySearchTest {
         assertEquals(expectedIndex, actualIndex);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchTwoElementArrayAndReturnSecondIndex() {
         //precondition
-        int searchTarget = 1;
-        values = new int[]{3,1};
+        int searchTarget = 3;
+        values = new int[]{1, 3};
         int expectedIndex = 1;
 
         //perform test
@@ -62,12 +53,12 @@ public class BinarySearchTest {
         assertEquals(expectedIndex, actualIndex);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchTwoElementArrayWithValueNotInArray() {
         //precondition
         int searchTarget = 1;
-        values = new int[]{0,2};
-        int expectedIndex = binarySearch.notFound;
+        values = new int[]{0, 2};
+        int expectedIndex = binarySearch.NOT_FOUND;
 
         //perform test
         int actualIndex = binarySearch.chop(searchTarget, values);
@@ -76,12 +67,12 @@ public class BinarySearchTest {
         assertEquals(expectedIndex, actualIndex);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchNullArrayWithReturnNotFound() {
         //precondition
         int searchTarget = 1;
         values = null;
-        int expectedIndex = binarySearch.notFound;
+        int expectedIndex = binarySearch.NOT_FOUND;
 
         //perform test
         int actualIndex = binarySearch.chop(searchTarget, values);
@@ -90,11 +81,11 @@ public class BinarySearchTest {
         assertEquals(expectedIndex, actualIndex);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchMultipleValueArrayWhenSearchingNegativeNumber() {
         //precondition
         int searchTarget = 7;
-        values = new int[]{-12,-5,0,4,7};
+        values = new int[]{-12, -5, 0, 4, 7};
         int expectedIndex = 4;
 
         //perform test
@@ -104,12 +95,54 @@ public class BinarySearchTest {
         assertEquals(expectedIndex, actualIndex);
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void successfullySearchMultipleValueArrayWithSameValuesAndReturnFirstIndex() {
         //precondition
         int searchTarget = 7;
-        values = new int[]{7,7,7,7,7,7};
+        values = new int[]{7, 7, 7, 7, 7, 7};
         int expectedIndex = 0;
+
+        //perform test
+        int actualIndex = binarySearch.chop(searchTarget, values);
+
+        //post-condition/assertion
+        assertEquals(expectedIndex, actualIndex);
+    }
+
+    @Test(timeout = 1000)
+    public void successfullySearchMultipleValueArrayWithSameValuesExceptFirstValueAndReturnFirstIndex() {
+        //precondition
+        int searchTarget = 7;
+        values = new int[]{1, 7, 7, 7, 7, 7};
+        int expectedIndex = 1;
+
+        //perform test
+        int actualIndex = binarySearch.chop(searchTarget, values);
+
+        //post-condition/assertion
+        assertEquals(expectedIndex, actualIndex);
+    }
+
+    @Test(timeout = 1000)
+    public void successfullySearchMultipleValueArrayWithSameValuesExceptFirstTwoValuesAndReturnFirstIndex() {
+        //precondition
+        int searchTarget = 7;
+        values = new int[]{1, 2, 7, 7, 7, 7};
+        int expectedIndex = 2;
+
+        //perform test
+        int actualIndex = binarySearch.chop(searchTarget, values);
+
+        //post-condition/assertion
+        assertEquals(expectedIndex, actualIndex);
+    }
+
+    @Test(timeout = 1000)
+    public void successfullySearchMultipleValueArrayWithAllNegativeNumbers() {
+        //precondition
+        int searchTarget = -43;
+        values = new int[]{-123, -94, -88, -43, -32, -7};
+        int expectedIndex = 3;
 
         //perform test
         int actualIndex = binarySearch.chop(searchTarget, values);
